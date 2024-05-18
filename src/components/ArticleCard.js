@@ -1,10 +1,15 @@
 import React from "react";
-import SkeletonLoader from "./Loader";
+import { Link } from "react-router-dom";
 
 const ArticleCard = ({ index, article, isLoading }) => {
   const isSecondDiv = index % 3 === 0;
   const spanClass = isSecondDiv ? "lg:col-span-6" : "lg:col-span-3";
   const heightClass = isSecondDiv ? "lg:row-span-2" : "lg:row-span-1";
+
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    return String(newDate).slice(4, 15);
+  };
 
   return (
     <>
@@ -23,8 +28,19 @@ const ArticleCard = ({ index, article, isLoading }) => {
             src={article.image_url}
             alt="article"
           />
-          <p className="font-bold underline">{article.title}</p>
+          <a
+            className="font-bold underline"
+            href={article.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {article.title}
+          </a>
           <p className="mt-1">{article.source?.name}</p>
+          <p className="flex justify-between text-sm px-1">
+            <span>{formatDate(article?.pubDate)}</span>
+            <span>{article?.source_id}</span>
+          </p>
         </div>
       )}
     </>
