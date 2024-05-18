@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const ArticleCard = ({ index, article, isLoading }) => {
   const isSecondDiv = index % 3 === 0;
